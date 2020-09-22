@@ -1,30 +1,50 @@
 import React, {useState} from 'react';
 import Unsplash, {toJson} from 'unsplash-js';
+import Checkbox from './CheckBox';
 
 const unsplash = new Unsplash({
     accessKey:process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
 })
 
 export default function SearchPhotos(){
-    const [query, setQuery] = useState('')
+    const [query, setQuery] = useState('');
     const [pics, setPics] = useState([]);
-    
-    const searchPhotos = async (e) => {
-        
+
+    const searchQuery = async (e) => {
         e.preventDefault();
-        unsplash.search
-        .photos(query)
-        .then(toJson)
-        .then((json) => {
-            setPics(json.results)
-        })
-        .catch((error) => console.log(error));
+        if (document.querySelector('.user_check').checked){
+
+            unsplash.search
+            .users(query)
+            .then(toJson)
+            .then((json) => {
+                console.log(json)
+                setPics(json.results)
+            })
+            .catch((error) => console.log(error));
+        }
+        else {
+            unsplash.search
+            .photos(query)
+            .then(toJson)
+            .then((json) => {
+                console.log(json)
+                setPics(json.results)
+            })
+            .catch((error) => console.log(error));
+        }
     }
     
-    
+    const handleCheckbox = (e) => {
+        let name = e.target.name
+        if (e.target.checked) {
+            console.log(name)
+            return name
+        }
+    }
     return (
         <>
-        <form className="form" onSubmit={searchPhotos}>
+        <form className="form" onSubmit={searchQuery}>
             <label className="label" htmlFor="query">
                 {" "}
                 📷
@@ -42,7 +62,8 @@ export default function SearchPhotos(){
             }}
 
             />
-            <button type="submit" className="button">Search</button>          
+            <button type="submit" className="button">Search</button>
+            <Checkbox handleClick={handleCheckbox}/>          
         </form>
 
         <div className="card-list">

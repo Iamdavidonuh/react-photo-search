@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SearchPhotos from './components/SearchPhotos';
+import Search from './components/Search';
 
 function App() {
   return (
@@ -8,7 +8,7 @@ function App() {
       <div className="container">
         <h1 className='title'> React Photo Search</h1>
 
-        <SearchPhotos />
+        <Search />
       </div>
     </div>
   );

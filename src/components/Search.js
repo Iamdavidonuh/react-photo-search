@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Unsplash, {toJson} from 'unsplash-js';
 import Checkbox from './CheckBox';
-import SearchPhotos from './searchresults/SearchPhotos'
+import SearchResults from './searchresults/SearchResults';
 
 const unsplash = new Unsplash({
     accessKey:process.env.REACT_APP_UNSPLASH_ACCESS_KEY,
@@ -37,7 +37,6 @@ export default function Search(){
     const handleCheckbox = (e) => {
         let name = e.target.name
         if (e.target.checked) {
-            console.log(name)
             return name
         }
     }
@@ -64,7 +63,7 @@ export default function Search(){
             <button type="submit" className="button">Search</button>
             <Checkbox handleClick={handleCheckbox}/>          
         </form>
-        <SearchPhotos pics={pics}/>
+        <SearchResults pics={pics} filter ={handleCheckbox}/>
         </>
     )
 }

@@ -16,6 +16,11 @@
   padding: 40px;
 }
 
+.search-box {
+  margin: 0 20px;
+  padding: 8px;
+}
+
 .title {
   font-size: 4.4rem;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
